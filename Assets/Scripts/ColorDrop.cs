@@ -19,6 +19,7 @@ public class ColorDrop : MonoBehaviour {
 	        		
 					Vector2 hitPoint = missileHit.point;
 					GameObject splashObj=(GameObject)Instantiate(splashPrefab, hitPoint,Quaternion.identity);
+					splashObj.transform.SetParent(coll.transform);
 					splashObj.GetComponent<Splash>().SetColor(color);
 					alive=false;
 					GetComponent<Collider2D>().enabled=false;
