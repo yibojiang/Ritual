@@ -31,7 +31,7 @@ namespace UnityStandardAssets._2D
                 // Debug.Log("Fire");
                 Vector2 p1=transform.position;
                 Vector2 p2=transform.position;
-                p2+=new Vector2(0, -2);
+                p2+=new Vector2(0, -1.5f);
                 // Debug.Log("p1: "+p1+" - "+p2);
                 Debug.DrawLine(p1,p2,Color.red,1f);
                 int layerMask=1<<LayerMask.NameToLayer("Splash");
@@ -40,10 +40,22 @@ namespace UnityStandardAssets._2D
                 if (hit.collider!=null){
                     Debug.Log(hit.collider.name);    
                     Splash splash=hit.collider.GetComponent<Splash>();
+                    
                     if (mob.AbsorbColor(splash.color) ){
+                        Debug.Log("destroy: "+hit.collider.name);    
                         Destroy(splash.gameObject);
                     }
                 }
+            }
+
+            if(CrossPlatformInputManager.GetButtonDown("Fire2") ){
+                Color releaseCol=Color.black;
+                if (mob.ReleaseColor(out releaseCol) ){
+                    GameObject dropPrefab=Resources.Load<GameObject>("Prefab/ColorDrop");
+                    GameObject dropObj=(GameObject)Instantiate(dropPrefab, transform.position,Quaternion.identity);    
+                    dropObj.GetComponent<ColorDrop>().SetColor( releaseCol);
+                }
+                
             }
         }
 

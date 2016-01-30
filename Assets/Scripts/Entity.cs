@@ -15,8 +15,10 @@ public class Entity : MonoBehaviour {
 		return false;
 	}
 
-	public bool ReleaseColor(){
+	public bool ReleaseColor(out Color _color){
+		_color=Color.black;
 		if (colors.Count>0){
+			_color=colors[colors.Count-1];
 			colors.RemoveAt(colors.Count-1);
 			UpdateColor();	
 			return true;
@@ -24,11 +26,20 @@ public class Entity : MonoBehaviour {
 		return false;
 	}
 
-	public void UpdateColor(){
+	public Color GetColor(){
 		Color col=Color.black;
 		for(int i=0;i<colors.Count;i++){
 			col+=colors[i];
 		}
+		col.r=Mathf.Clamp01(col.r);
+		col.g=Mathf.Clamp01(col.g);
+		col.b=Mathf.Clamp01(col.b);
+		col.a=Mathf.Clamp01(col.a);
+		return col;
+	}
+
+	public void UpdateColor(){
+		Color col=GetColor();
 
 		for(int i=0;i<sprites.Count;i++){
 			sprites[i].color=col;

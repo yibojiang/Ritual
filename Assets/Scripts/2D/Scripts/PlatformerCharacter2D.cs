@@ -20,6 +20,9 @@ namespace UnityStandardAssets._2D
         private Rigidbody2D m_Rigidbody2D;
         private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
+        public float speedFactor=1;
+
+        public Mob mob;
         private void Awake()
         {
             // Setting up references.
@@ -27,6 +30,7 @@ namespace UnityStandardAssets._2D
             m_CeilingCheck = transform.Find("CeilingCheck");
             m_Anim = GetComponent<Animator>();
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
+            mob=GetComponent<Mob>();
         }
 
 
@@ -37,11 +41,33 @@ namespace UnityStandardAssets._2D
             // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
             // This can be done using layers instead but Sample Assets will not overwrite your project settings.
             Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
-            for (int i = 0; i < colliders.Length; i++)
-            {
-                if (colliders[i].gameObject != gameObject)
+            
+            
+            for (int i = 0; i < colliders.Length; i++){
+
+                if (colliders[i].gameObject != gameObject){
                     m_Grounded = true;
+                    
+                    speedFactor=1f;    
+
+                    if (colliders[i].CompareTag("Splash")){
+                        Splash splash=colliders[i].GetComponent<Splash>();
+
+                        // Debug.Log(colliders[i].gameObject.name);
+                        // Debug.Log("splash: "+splash.color);
+                        if (splash.color==mob.GetColor() ){
+                            speedFactor=1.5f;
+                        }
+                        
+                        break;
+                    }
+                    
+
+                    
+                }
             }
+            // Debug.Log(mob.GetColor());
+            // Debug.Log("speed factor: "+speedFactor);
             m_Anim.SetBool("Ground", m_Grounded);
 
             // Set the vertical animation
@@ -68,7 +94,8 @@ namespace UnityStandardAssets._2D
             if (m_Grounded || m_AirControl)
             {
                 // Reduce the speed if crouching by the crouchSpeed multiplier
-                move = (crouch ? move*m_CrouchSpeed : move);
+                move = (crouch ? move*m_CrouchSpeed : move) *speedFactor;
+                // Debug.Log("move: "+move);
 
                 // The Speed animator parameter is set to the absolute value of the horizontal input.
                 m_Anim.SetFloat("Speed", Mathf.Abs(move));
