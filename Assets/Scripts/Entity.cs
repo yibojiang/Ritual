@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Spine;
 
 public class Entity : MonoBehaviour {
 	public List<Color> colors;
 	public List<SpriteRenderer> sprites;
+	public SkeletonRenderer[] srs;
 
 	public bool AbsorbColor(Color _color){
 		if (!colors.Contains(_color) ){
@@ -44,7 +46,22 @@ public class Entity : MonoBehaviour {
 		for(int i=0;i<sprites.Count;i++){
 			sprites[i].color=col;
 		}
+
+		if (srs==null){
+			srs=GetComponents<SkeletonRenderer>();
+		}
+
+		if (srs!=null){
+			for(int i=0;i<srs.Length;i++){
+				srs[i].skeleton.R=col.r;
+				srs[i].skeleton.G=col.g;
+				srs[i].skeleton.B=col.b;
+			}	
+		}
+		
 	}
+
+
 
 	// Use this for initialization
 	void Start () {
