@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour {
 			instance =GameObject.FindObjectOfType<GameManager>();
 		return instance;
 	}
+
+	public Color[] colors;
 	// Use this for initialization
 	void Start () {
 	
