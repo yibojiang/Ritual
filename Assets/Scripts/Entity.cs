@@ -17,6 +17,21 @@ public class Entity : MonoBehaviour {
 		return false;
 	}
 
+	public void RemoveColor(Color _color){
+		int removeID=-1;
+		for (int i=0;i<colors.Count;i++){
+			if (colors[i]==_color){
+				removeID=i;
+				break;
+			}
+		}
+
+		if (removeID!=-1){
+			colors.RemoveAt(removeID);
+			UpdateColor();	
+		}
+	}
+
 	public bool ReleaseColor(out Color _color){
 		_color=Color.black;
 		if (colors.Count>0){
@@ -37,6 +52,13 @@ public class Entity : MonoBehaviour {
 		col.g=Mathf.Clamp01(col.g);
 		col.b=Mathf.Clamp01(col.b);
 		col.a=Mathf.Clamp01(col.a);
+
+		if (col==Color.black){
+			col=Color.white;
+		}
+		else if (col==Color.white){
+			col=Color.black;
+		}
 		return col;
 	}
 

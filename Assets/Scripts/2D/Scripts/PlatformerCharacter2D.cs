@@ -92,7 +92,7 @@ namespace UnityStandardAssets._2D
 
             // Set whether or not the character is crouching in the animator
             m_Anim.SetBool("Boost", boost);
-            Debug.Log("boost: "+ boost);
+            // Debug.Log("boost: "+ boost);
 
             //only control the player if grounded or airControl is turned on
             if (m_Grounded || m_AirControl)
