@@ -86,6 +86,9 @@ namespace UnityStandardAssets._2D
             //         boost = true;
             //     }
             // }
+            if (jump){
+                m_Anim.SetTrigger("Jump");    
+            }
 
             // Set whether or not the character is crouching in the animator
             m_Anim.SetBool("Boost", boost);
