@@ -1,6 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum ColorEnum{
+	White=0,
+	Red=1,
+	Green=2,
+	RG=3,
+	Blue=4,
+	RB=5,
+	GB=6,
+	RGB=7
+}
+
 public class GameManager : MonoBehaviour {
 	private static GameManager instance ;
 	public static  GameManager Instance(){
@@ -10,6 +21,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public Color[] colors;
+	public Color GetColor(ColorEnum _colorEnum){
+		return colors[(int)_colorEnum];
+	}
+
 	// Use this for initialization
 	void Start () {
 	
