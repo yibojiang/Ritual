@@ -63,11 +63,11 @@ namespace UnityStandardAssets._2D
         private void FixedUpdate()
         {
             // Read the inputs.
-            bool boost = Input.GetKey(KeyCode.LeftShift);
-            Debug.Log("input boost: "+boost);
+            // bool boost = Input.GetKey(KeyCode.LeftShift);
+            // Debug.Log("input boost: "+boost);
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             // Pass all parameters to the character control script.
-            m_Character.Move(h, boost, m_Jump);
+            m_Character.Move(h, false, m_Jump);
             m_Jump = false;
         }
     }
