@@ -16,7 +16,10 @@ public class ButtonTrigger : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if(other.CompareTag("Mob")){
+
 			btn.transform.localPosition=new Vector3(0, 0, 0);
+			AudioManager am=AudioManager.Instance();
+			am.PlaySound(am.buttonClip);
 			target.SendMessage("TriggerEvent");
 		}
 	}
