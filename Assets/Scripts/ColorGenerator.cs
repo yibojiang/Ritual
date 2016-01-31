@@ -4,10 +4,14 @@ using System.Collections;
 public class ColorGenerator : MonoBehaviour {
 	public ColorEnum color;
 	public SpriteRenderer[] srs;
-
+	public GameObject activePart;
 	void Awake(){
 		
 		SetColor(GameManager.Instance().GetColor(color));
+	}
+
+	void Start(){
+		UpdateStates();
 	}
 
 	public void SetColor(Color _color){
@@ -33,5 +37,23 @@ public class ColorGenerator : MonoBehaviour {
 				
 			
 		}
+	}
+
+	public bool isOn=true;
+	
+	void UpdateStates(){
+		if (isOn){
+			activePart.SetActive(true);
+			GetComponent<Collider2D>().enabled=true;
+		}
+		else{
+			activePart.SetActive(false);
+			GetComponent<Collider2D>().enabled=false;
+		}
+	}
+
+	public void SwtichOnOff(){
+		isOn=!isOn;
+		UpdateStates();
 	}
 }
