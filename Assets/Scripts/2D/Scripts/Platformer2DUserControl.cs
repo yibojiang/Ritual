@@ -42,7 +42,7 @@ namespace UnityStandardAssets._2D
                     Splash splash=hit.collider.GetComponent<Splash>();
                     
                     if (mob.AbsorbColor(splash.color) ){
-                        Debug.Log("destroy: "+hit.collider.name);    
+                        // Debug.Log("destroy: "+hit.collider.name);    
                         Destroy(splash.gameObject);
                     }
                 }
@@ -54,8 +54,9 @@ namespace UnityStandardAssets._2D
                     GameObject dropPrefab=Resources.Load<GameObject>("Prefab/ColorDrop");
                     GameObject dropObj=(GameObject)Instantiate(dropPrefab, transform.position,Quaternion.identity);    
                     dropObj.GetComponent<ColorDrop>().color=releaseCol;
-                    GameManager gm=GameManager.Instance();
-                    dropObj.GetComponent<ColorDrop>().SetColor( gm.GetColor(releaseCol));
+                    
+                    // GameManager gm=GameManager.Instance();
+                    // dropObj.GetComponent<ColorDrop>().SetColor( gm.GetColor(releaseCol));
                 }
                 
             }

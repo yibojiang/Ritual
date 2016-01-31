@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEditor;
-[CustomEditor(typeof(SplashEditor) ),CanEditMultipleObjects]
+[CustomEditor(typeof(Splash) ),CanEditMultipleObjects]
 public class SplashEditor : Editor {
 
 	// Use this for initialization

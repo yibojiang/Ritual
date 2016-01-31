@@ -8,7 +8,7 @@ public class ColorDrop : MonoBehaviour {
 
 	public ColorEnum color;
 
-	void Awake(){
+	void Start(){
 		GameManager gm=GameManager.Instance();
 		SetColor(gm.GetColor(color));
 	}
@@ -19,8 +19,8 @@ public class ColorDrop : MonoBehaviour {
 			if (srs[i].gameObject.name!="base"){
 				srs[i].color=_color;	
 			}
-			
 		}
+		// Debug.Log("dropcol: "+_color);
 	}
 
 	 void OnCollisionEnter2D(Collision2D coll) {
