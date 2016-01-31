@@ -41,7 +41,7 @@ namespace UnityStandardAssets._2D
                     Debug.Log(hit.collider.name);    
                     Splash splash=hit.collider.GetComponent<Splash>();
                     
-                    if (mob.AbsorbColor(splash.Color) ){
+                    if (mob.AbsorbColor(splash.color) ){
                         Debug.Log("destroy: "+hit.collider.name);    
                         Destroy(splash.gameObject);
                     }
@@ -49,11 +49,13 @@ namespace UnityStandardAssets._2D
             }
 
             if(CrossPlatformInputManager.GetButtonDown("Fire2") ){
-                Color releaseCol=Color.black;
+                ColorEnum releaseCol=ColorEnum.White;
                 if (mob.ReleaseColor(out releaseCol) ){
                     GameObject dropPrefab=Resources.Load<GameObject>("Prefab/ColorDrop");
                     GameObject dropObj=(GameObject)Instantiate(dropPrefab, transform.position,Quaternion.identity);    
-                    dropObj.GetComponent<ColorDrop>().SetColor( releaseCol);
+                    dropObj.GetComponent<ColorDrop>().color=releaseCol;
+                    GameManager gm=GameManager.Instance();
+                    dropObj.GetComponent<ColorDrop>().SetColor( gm.GetColor(releaseCol));
                 }
                 
             }

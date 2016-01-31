@@ -38,7 +38,7 @@ public class ColorFilter : MonoBehaviour {
 		if (_collider.CompareTag("Mob")){
 			Mob mob=_collider.GetComponent<Mob>();
 			GameManager gm=GameManager.Instance();
-			mob.RemoveColor(gm.GetColor(color));
+			mob.RemoveColor(color);
 				
 			
 		}

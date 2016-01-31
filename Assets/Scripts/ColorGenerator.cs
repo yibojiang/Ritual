@@ -29,7 +29,7 @@ public class ColorGenerator : MonoBehaviour {
 			Mob mob=_collider.GetComponent<Mob>();
 			GameManager gm=GameManager.Instance();
 			
-			mob.AbsorbColor(gm.GetColor(color));
+			mob.AbsorbColor(color);
 				
 			
 		}
