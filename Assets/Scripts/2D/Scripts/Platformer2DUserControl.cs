@@ -41,7 +41,7 @@ namespace UnityStandardAssets._2D
                     Debug.Log(hit.collider.name);    
                     Splash splash=hit.collider.GetComponent<Splash>();
                     
-                    if (mob.AbsorbColor(splash.color) ){
+                    if (mob.AbsorbColor(splash.Color) ){
                         Debug.Log("destroy: "+hit.collider.name);    
                         Destroy(splash.gameObject);
                     }

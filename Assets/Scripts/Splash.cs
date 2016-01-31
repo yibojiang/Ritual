@@ -2,11 +2,17 @@
 using System.Collections;
 
 public class Splash : MonoBehaviour {
-	public Color color=Color.white;
+	// public Color color=Color.white;
+	public ColorEnum color;
+	public Color Color{
+		get{
+			return GameManager.Instance().GetColor(color);
+		}
+	}
 	public SpriteRenderer[] srs;
 
 	void Awake(){
-		SetColor(color);
+		SetColor(Color);
 	}
 	// Use this for initialization
 	public void SetColor(Color _color){
@@ -14,9 +20,11 @@ public class Splash : MonoBehaviour {
 			srs=GetComponentsInChildren<SpriteRenderer>();
 		}
 		
-		color=_color;
+
 		for (int i=0;i<srs.Length;i++){
-			srs[i].color=_color;
+			if (srs[i].gameObject.name!="base"){
+				srs[i].color=_color;
+			}
 		}
 	}
 	
