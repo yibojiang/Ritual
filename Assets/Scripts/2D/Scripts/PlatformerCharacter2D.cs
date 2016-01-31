@@ -22,6 +22,7 @@ namespace UnityStandardAssets._2D
 
         public float speedFactor=1;
 
+        public ParticleSystem ps;
         public Mob mob;
         private void Awake()
         {
@@ -49,14 +50,22 @@ namespace UnityStandardAssets._2D
                     m_Grounded = true;
                     
                     speedFactor=1f;    
-
+                    
                     if (colliders[i].CompareTag("Splash")){
                         Splash splash=colliders[i].GetComponent<Splash>();
 
                         // Debug.Log(colliders[i].gameObject.name);
                         // Debug.Log("splash: "+splash.color);
                         if (splash.Color==mob.GetColor() ){
-                            speedFactor=2.5f;
+                            speedFactor=2.0f;
+                        }
+                        else{
+                            speedFactor=0.3f;   
+                            if (!ps.isPlaying ){
+                                Debug.Log("play");
+                                ps.Play();    
+                            }
+                            
                         }
 
                         break;

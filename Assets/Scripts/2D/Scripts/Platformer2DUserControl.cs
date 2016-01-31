@@ -48,9 +48,10 @@ namespace UnityStandardAssets._2D
                 }
             }
 
-            if(CrossPlatformInputManager.GetButtonDown("Fire2") ){
+            if(CrossPlatformInputManager.GetButton("Fire2") ){
                 ColorEnum releaseCol=ColorEnum.White;
-                if (mob.ReleaseColor(out releaseCol) ){
+                if (mob.GetReleaseColor(out releaseCol) ){
+                // if (mob.ReleaseColor(out releaseCol) ){
                     GameObject dropPrefab=Resources.Load<GameObject>("Prefab/ColorDrop");
                     GameObject dropObj=(GameObject)Instantiate(dropPrefab, transform.position,Quaternion.identity);    
                     dropObj.GetComponent<ColorDrop>().color=releaseCol;
