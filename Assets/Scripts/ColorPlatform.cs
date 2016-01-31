@@ -24,7 +24,22 @@ public class ColorPlatform : MonoBehaviour {
 	}
 
 	
-	
+	public void SwtichColor(){
+		int finalCol=(int)color;
+		GameManager gm=GameManager.Instance();
+		if (finalCol<gm.colors.Length-1){
+			finalCol++;
+		}
+		else{
+			finalCol=1;	
+		}
+
+		color=(ColorEnum)finalCol;
+		SetColor(gm.GetColor(color));
+
+		gm.player.UpdateColor();
+	}
+
 	// Update is called once per frame
 	void Update () {
 	

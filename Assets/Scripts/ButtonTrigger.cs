@@ -22,7 +22,7 @@ public class ButtonTrigger : MonoBehaviour {
 	}
 
 	void OnTriggerExit2D(Collider2D other){
-		Debug.Log("OnTriggerExit2D");
+		// Debug.Log("OnTriggerExit2D");
 		if(other.CompareTag("Mob")){
 			btn.transform.localPosition=new Vector3(0, 0.11f, 0);
 			

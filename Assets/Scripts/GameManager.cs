@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public Color[] colors;
+	public Mob player;
 	public Color GetColor(ColorEnum _colorEnum){
 		return colors[(int)_colorEnum];
 	}
