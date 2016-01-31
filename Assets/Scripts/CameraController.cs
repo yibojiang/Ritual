@@ -16,6 +16,28 @@ public class CameraController : MonoBehaviour {
 	void Start () {
 	
 	}
+
+	public SpriteRenderer fade;
+	public void ColorTo(Color _color){
+		
+		StartCoroutine(DoColorTo(_color) );
+	}
+
+	IEnumerator DoColorTo(Color _color){
+		float toggle=0;
+		float interval=0.2f;
+		fade.color=_color;
+		while (toggle<interval){
+			toggle+=Time.deltaTime;
+			// fade.color=_color;
+			Color tmpCol=fade.color;
+			tmpCol.a=1f-toggle/interval;
+			fade.color=tmpCol;
+			fade.transform.localScale=Vector3.Lerp(Vector3.zero,new Vector3(20,20, 1),toggle/interval );
+			yield return new WaitForEndOfFrame();
+		}
+
+	}
 	
 	// Update is called once per frame
 	void LateUpdate () {

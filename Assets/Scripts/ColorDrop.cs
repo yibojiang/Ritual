@@ -27,7 +27,7 @@ public class ColorDrop : MonoBehaviour {
 		Debug.Log(other);
 		if (alive){
 			if (other.gameObject.CompareTag("Splash") ){
-				Debug.Log(other);
+				// Debug.Log(other);
 	 			GameManager gm=GameManager.Instance();
 	 			Splash splash=other.gameObject.GetComponent<Splash>();
 	 			splash.color=splash.color | color;

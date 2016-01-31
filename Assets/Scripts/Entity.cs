@@ -8,11 +8,21 @@ public class Entity : MonoBehaviour {
 	public List<SpriteRenderer> sprites;
 	public SkeletonRenderer[] srs;
 
+	public bool ContainsColor(ColorEnum _color){
+		if ( ( (int)color & (int)_color )==0 ){
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+
 	public bool AbsorbColor(ColorEnum _color){
 		if ( ( (int)color & (int)_color )==0 ){
 			int finalCol=(int)color+(int)_color;
 			color=(ColorEnum)finalCol;
 			UpdateColor();	
+			CameraController.Instance().ColorTo(GetColor());
 			return true;
 		}
 		return false;
@@ -22,8 +32,10 @@ public class Entity : MonoBehaviour {
 		if ( ((int)color & (int)_color )!=0){
 			int finalCol=(int)color-(int)_color;
 			color=(ColorEnum)finalCol;
+			UpdateColor();	
+			CameraController.Instance().ColorTo(GetColor());
 		}
-		UpdateColor();	
+		
 		
 	}
 
@@ -31,7 +43,8 @@ public class Entity : MonoBehaviour {
 		_color=color;
 		if (color!=ColorEnum.White){
 			color=ColorEnum.White;
-			UpdateColor();	
+			UpdateColor();
+			CameraController.Instance().ColorTo(GetColor());	
 			return true;
 		}
 		
@@ -42,6 +55,7 @@ public class Entity : MonoBehaviour {
 		_color=color;
 		if (color!=ColorEnum.White){
 			UpdateColor();	
+			// CameraController.Instance().ColorTo(GetColor());
 			return true;
 		}
 		
@@ -77,6 +91,8 @@ public class Entity : MonoBehaviour {
 		 		SetLayerRecursively(platforms[i].gameObject,LayerMask.NameToLayer("Ghost"));
 		 	}
 		 }
+
+
 
 		if (srs==null){
 			srs=GetComponents<SkeletonRenderer>();

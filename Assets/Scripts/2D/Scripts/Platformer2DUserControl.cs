@@ -27,28 +27,56 @@ namespace UnityStandardAssets._2D
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
 
-            if(CrossPlatformInputManager.GetButtonDown("Fire1") ){
-                // Debug.Log("Fire");
-                Vector2 p1=transform.position;
-                Vector2 p2=transform.position;
-                p2+=new Vector2(0, -1.5f);
-                // Debug.Log("p1: "+p1+" - "+p2);
-                Debug.DrawLine(p1,p2,Color.red,1f);
-                int layerMask=1<<LayerMask.NameToLayer("Splash");
-                // Debug.Log("layer mask: "+layerMask);
-                RaycastHit2D hit=Physics2D.Linecast(p1,p2,layerMask);
-                if (hit.collider!=null){
-                    Debug.Log(hit.collider.name);    
-                    Splash splash=hit.collider.GetComponent<Splash>();
-                    
-                    if (mob.AbsorbColor(splash.color) ){
-                        // Debug.Log("destroy: "+hit.collider.name);    
-                        Destroy(splash.gameObject);
-                    }
+            if (Input.GetKeyDown(KeyCode.Alpha1) ){
+                if (!mob.ContainsColor(ColorEnum.Red) ){
+                    mob.AbsorbColor(ColorEnum.Red);
+                }
+                else{
+                    mob.RemoveColor(ColorEnum.Red);
+                }
+                
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2) ){
+                if (!mob.ContainsColor(ColorEnum.Green) ){
+                    mob.AbsorbColor(ColorEnum.Green);
+                }
+                else{
+                    mob.RemoveColor(ColorEnum.Green);
                 }
             }
 
-            if(CrossPlatformInputManager.GetButton("Fire2") ){
+            if (Input.GetKeyDown(KeyCode.Alpha3) ){
+                if (!mob.ContainsColor(ColorEnum.Blue) ){
+                    mob.AbsorbColor(ColorEnum.Blue);
+                }
+                else{
+                    mob.RemoveColor(ColorEnum.Blue);
+                }
+            }
+
+            // if(CrossPlatformInputManager.GetButtonDown("Fire2") ){
+            //     // Debug.Log("Fire");
+            //     Vector2 p1=transform.position;
+            //     Vector2 p2=transform.position;
+            //     p2+=new Vector2(0, -1.5f);
+            //     // Debug.Log("p1: "+p1+" - "+p2);
+            //     Debug.DrawLine(p1,p2,Color.red,1f);
+            //     int layerMask=1<<LayerMask.NameToLayer("Splash");
+            //     // Debug.Log("layer mask: "+layerMask);
+            //     RaycastHit2D hit=Physics2D.Linecast(p1,p2,layerMask);
+            //     if (hit.collider!=null){
+            //         Debug.Log(hit.collider.name);    
+            //         Splash splash=hit.collider.GetComponent<Splash>();
+                    
+            //         if (mob.AbsorbColor(splash.color) ){
+            //             // Debug.Log("destroy: "+hit.collider.name);    
+            //             Destroy(splash.gameObject);
+            //         }
+            //     }
+            // }
+
+            if(CrossPlatformInputManager.GetButton("Fire1") ){
                 ColorEnum releaseCol=ColorEnum.White;
                 if (mob.GetReleaseColor(out releaseCol) ){
                 // if (mob.ReleaseColor(out releaseCol) ){
