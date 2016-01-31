@@ -9,11 +9,6 @@ public class Entity : MonoBehaviour {
 	public SkeletonRenderer[] srs;
 
 	public bool AbsorbColor(ColorEnum _color){
-		// if (!colors.Contains(_color) ){
-		// 	colors.Add(_color);
-		// 	UpdateColor();	
-		// 	return true;
-		// }
 		if ( ( (int)color & (int)_color )==0 ){
 			int finalCol=(int)color+(int)_color;
 			color=(ColorEnum)finalCol;
@@ -24,9 +19,6 @@ public class Entity : MonoBehaviour {
 	}
 
 	public void RemoveColor(ColorEnum _color){
-		// if (colors.Contains(_color) ){
-		// 	colors.Remove(_color);
-		// }
 		if ( ((int)color & (int)_color )!=0){
 			int finalCol=(int)color-(int)_color;
 			color=(ColorEnum)finalCol;
@@ -36,14 +28,6 @@ public class Entity : MonoBehaviour {
 	}
 
 	public bool ReleaseColor(out ColorEnum _color){
-		// _color=Color.black;
-		// _color=ColorEnum.White;
-		// if (colors.Count>0){
-		// 	_color=colors[colors.Count-1];
-		// 	colors.RemoveAt(colors.Count-1);
-		// 	UpdateColor();	
-		// 	return true;
-		// }
 		_color=color;
 		if (color!=ColorEnum.White){
 			color=ColorEnum.White;
@@ -55,13 +39,6 @@ public class Entity : MonoBehaviour {
 	}
 
 	public bool GetReleaseColor(out ColorEnum _color){
-		// _color=ColorEnum.White;
-		// if (colors.Count>0){
-		// 	_color=colors[colors.Count-1];
-		// 	// colors.RemoveAt(colors.Count-1);
-		// 	// UpdateColor();	
-		// 	return true;
-		// }
 		_color=color;
 		if (color!=ColorEnum.White){
 			UpdateColor();	
@@ -72,16 +49,16 @@ public class Entity : MonoBehaviour {
 	}
 
 	public Color GetColor(){
-		
-
-		// int finalCol=0;
-		// for(int i=0;i<colors.Count;i++){
-		// 	finalCol=finalCol | (int)colors[i];
-		// }
-
-		// return GameManager.Instance().GetColor((ColorEnum)finalCol);
 		return GameManager.Instance().GetColor(color);
 	}
+
+	public static void SetLayerRecursively(GameObject go, int layerNumber)
+    {
+        foreach (Transform trans in go.GetComponentsInChildren<Transform>(true))
+        {
+            trans.gameObject.layer = layerNumber;
+        }
+    }
 
 	public void UpdateColor(){
 		Color col=GetColor();
@@ -89,6 +66,17 @@ public class Entity : MonoBehaviour {
 		for(int i=0;i<sprites.Count;i++){
 			sprites[i].color=col;
 		}
+
+		 ColorPlatform[] platforms = FindObjectsOfType<ColorPlatform>();
+		 for (int i=0;i<platforms.Length;i++){
+		 	if (platforms[i].color==color){
+		 		
+		 		SetLayerRecursively(platforms[i].gameObject,LayerMask.NameToLayer("Default"));
+		 	}
+		 	else{
+		 		SetLayerRecursively(platforms[i].gameObject,LayerMask.NameToLayer("Ghost"));
+		 	}
+		 }
 
 		if (srs==null){
 			srs=GetComponents<SkeletonRenderer>();
