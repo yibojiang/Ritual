@@ -21,6 +21,7 @@ public class Entity : MonoBehaviour {
 		if ( ( (int)color & (int)_color )==0 ){
 			int finalCol=(int)color+(int)_color;
 			color=(ColorEnum)finalCol;
+			finalCol=Mathf.Max(finalCol,0);
 			UpdateColor();	
 			CameraController.Instance().ColorTo(GetColor());
 			return true;
@@ -31,7 +32,9 @@ public class Entity : MonoBehaviour {
 	public void RemoveColor(ColorEnum _color){
 		if ( ((int)color & (int)_color )!=0){
 			int finalCol=(int)color-(int)_color;
+			finalCol=Mathf.Max(finalCol,0);
 			color=(ColorEnum)finalCol;
+
 			UpdateColor();	
 			CameraController.Instance().ColorTo(GetColor());
 		}
