@@ -24,7 +24,7 @@ public class ColorDrop : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
-		Debug.Log(other);
+		// Debug.Log(other);
 		if (alive){
 			if (other.gameObject.CompareTag("Splash") ){
 				// Debug.Log(other);

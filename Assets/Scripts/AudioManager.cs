@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour {
 	}
 
 	public AudioClip buttonClip;
+	public AudioClip colorChangeClip;
 
 	public AudioSource audio;
 

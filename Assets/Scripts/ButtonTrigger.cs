@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class ButtonTrigger : MonoBehaviour {
-	public GameObject target;
+	public GameObject[] targets;
 	public GameObject btn;
 	// Use this for initialization
 	void Start () {
@@ -20,7 +20,12 @@ public class ButtonTrigger : MonoBehaviour {
 			btn.transform.localPosition=new Vector3(0, 0, 0);
 			AudioManager am=AudioManager.Instance();
 			am.PlaySound(am.buttonClip);
-			target.SendMessage("TriggerEvent");
+			for (int i=0;i<targets.Length;i++){
+				if (targets[i]!=null){
+					targets[i].SendMessage("TriggerEvent");		
+				}
+			}
+			
 		}
 	}
 

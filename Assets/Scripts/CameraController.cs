@@ -19,7 +19,8 @@ public class CameraController : MonoBehaviour {
 
 	public SpriteRenderer fade;
 	public void ColorTo(Color _color){
-		
+		AudioManager am=AudioManager.Instance();
+		am.PlaySound(am.colorChangeClip);
 		StartCoroutine(DoColorTo(_color) );
 	}
 
